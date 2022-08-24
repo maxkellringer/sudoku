@@ -15,11 +15,7 @@ const Grid = ({ grid, handleCellClick }) => {
               <tr className="row" key={rowIndex}>
                 {row.map((cell, columnIndex) => {
                   return (
-                    <Node
-                      key={rowIndex + "-" + columnIndex}
-                      cell={cell}
-                      handleClickCallback={handleCellClick}
-                    />
+                    <Node key={rowIndex + "-" + columnIndex} cell={cell} handleClickCallback={handleCellClick}/>
                   );
                 })}
               </tr>

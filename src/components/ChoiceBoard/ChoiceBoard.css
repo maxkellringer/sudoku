@@ -1,6 +1,6 @@
 .choice-container {
   display: flex;
-  justify-content: space-around;
+  justify-content:space-around;
   flex: 1;
 }
 
@@ -11,6 +11,11 @@
   margin: 5px;
   border-radius: 10px;
   cursor: pointer;
+  translate: transform;
+}
+
+.choice:hover {
+  transform: scale(1.1);
 }
 
 .selected {

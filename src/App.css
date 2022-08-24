@@ -2,9 +2,9 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  color: #141c3a;
+  color: blue;
   user-select: none;
 }
 .App {
-  text-align: center;
+  text-align: left;
 }

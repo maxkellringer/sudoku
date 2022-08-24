@@ -8,7 +8,7 @@ const InformationModal = ({ closeModal }) => {
     <div className="InformationModal">
       <div className="modal-container">
         <div className="modal-close-btn-container">
-          <button onClick={closeModal}>X</button>
+          <button onClick={closeModal}>CLOSE</button>
         </div>
         <div className="modal-title">
           <h1>Sudoku Game</h1>

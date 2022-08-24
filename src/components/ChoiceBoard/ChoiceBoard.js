@@ -12,25 +12,18 @@ const ChoiceBoard = ({ setClickValue, selected }) => {
         {CHOICES1.map((choice) => {
           let selectedClass = choice === selected ? "selected" : "";
           return (
-            <div
-              className={`choice ${selectedClass} noSelect `}
-              key={`key-1-${choice}`}
-              onClick={() => setClickValue(choice)}
-            >
+            <div className={`choice ${selectedClass} noSelect `} key={`key-1-${choice}`} onClick={() => setClickValue(choice)}>
               <p className="choice-text">{choice}</p>
             </div>
           );
         })}
+        
       </div>
       <div className="choice-container choices-two">
         {CHOICES2.map((choice) => {
           let selectedClass = choice === selected ? "selected" : "";
           return (
-            <div
-              className={`choice ${selectedClass} noSelect`}
-              key={`key-2-${choice}`}
-              onClick={() => setClickValue(choice)}
-            >
+            <div className={`choice ${selectedClass} noSelect`} key={`key-2-${choice}`} onClick={() => setClickValue(choice)}>
               <p className="choice-text">{choice}</p>
             </div>
           );
@@ -44,7 +37,7 @@ const ChoiceBoard = ({ setClickValue, selected }) => {
           key={`key-2-${0}`}
           onClick={() => setClickValue(0)}
         >
-          <FaEraser />
+          <FaEraser/>
         </div>
       </div>
     </div>

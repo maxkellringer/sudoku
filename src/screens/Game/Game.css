@@ -6,7 +6,7 @@
 
   width: 100%;
   height: 100vh;
-  background: #f7fafc;
+  background: lavender;
   gap: 10px;
 }
 
@@ -20,7 +20,9 @@
 
 .main-title {
   margin-bottom: 10px;
+  color: red;
   text-decoration: underline;
+  cursor: pointer;
 }
 
 .show-game-detail-container-button {

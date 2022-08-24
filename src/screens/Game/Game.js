@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 import "./Game.css";
-import { AiOutlineMenu } from "react-icons/ai";
+import { FaReact } from "react-icons/fa";
 
 import {
   Grid,
@@ -35,82 +35,72 @@ const Game = () => {
   const [clickValue, setClickValue] = useLocalStorage("clickValue", 1);
 
   // Game Score logic
-  const [gameMode, setGameMode] = useLocalStorage(
-    "gameMode",
-    mediumMaxEmptyCells
-  );
+  const [gameMode, setGameMode] = useLocalStorage("gameMode", mediumMaxEmptyCells);
   const [movesTaken, setMovesTaken] = useLocalStorage("movesTaken", 0);
   const [hintsTaken, setHintsTaken] = useLocalStorage("hintsTaken", 0);
   const [isPlayerWon, setIsPlayerWon] = useLocalStorage("playerWon", false);
-  const [pressedSolve, setPressedSolve] = useLocalStorage(
-    "pressedSolve",
-    false
-  );
+  const [pressedSolve, setPressedSolve] = useLocalStorage("pressedSolve", false);
 
-  const [startTime, setStartTime] = useLocalStorage("startTime", () =>
-    Date().toLocaleString()
-  );
+  const [startTime, setStartTime] = useLocalStorage("startTime", () => Date().toLocaleString());
 
   // Logic for modal
   const [showInformationModal, setShowInformationModal] = useState(false);
-  const [showNoSolutionFoundModal, setShowNoSolutionFoundModal] =
-    useState(false);
+  const [showNoSolutionFoundModal, setShowNoSolutionFoundModal] = useState(false);
   const [showGameDetails, setShowGameDetails] = useState(false);
-  const [showDifficultySelectionModal, setShowDifficultySelectionModal] =
-    useState(false);
+  const [showDifficultySelectionModal, setShowDifficultySelectionModal] = useState(false);
 
-  const handleSolve = () => {
-    let solvedBoard = arrayDeepCopy(grid);
-    let solvedStatus = solveSudoku(solvedBoard);
-    if (solvedStatus === false) {
-      setShowNoSolutionFoundModal((show) => !show);
-      return;
-    }
+  // const handleSolve = () => {
+  //   let solvedBoard = arrayDeepCopy(grid);
+  //   let solvedStatus = solveSudoku(solvedBoard);
+  //   if (solvedStatus === false) {
+  //     setShowNoSolutionFoundModal((show) => !show);
+  //     return;
+  //   }
 
-    let newHints = 0;
-    for (let i = 0; i < 9; i++) {
-      for (let j = 0; j < 9; j++) {
-        if (grid[i][j].value === 0) {
-          newHints++;
-          solvedBoard[i][j].isHinted = true;
-          solvedBoard[i][j].isModifiable = false;
-        }
-      }
-    }
+  //   let newHints = 0;
+  //   for (let i = 0; i < 9; i++) {
+  //     for (let j = 0; j < 9; j++) {
+  //       if (grid[i][j].value === 0) {
+  //         newHints++;
+  //         solvedBoard[i][j].isHinted = true;
+  //         solvedBoard[i][j].isModifiable = false;
+  //       }
+  //     }
+  //   }
 
-    setHintsTaken((hints) => hints + newHints);
-    setIsPlayerWon(true);
-    setShowGameDetails(true);
-    setPressedSolve(true);
-    setGrid(solvedBoard);
-  };
+  //   setHintsTaken((hints) => hints + newHints);
+  //   setIsPlayerWon(true);
+  //   setShowGameDetails(true);
+  //   setPressedSolve(true);
+  //   setGrid(solvedBoard);
+  // };
 
-  const handleHint = () => {
-    // Checking if player has won
-    if (isPlayerWon) return;
+  // const handleHint = () => {
+  //   // Checking if player has won
+  //   if (isPlayerWon) return;
 
-    // Getting hint
-    let hintResponse = getHint(grid);
+  //   // Getting hint
+  //   let hintResponse = getHint(grid);
 
-    // Checking if the grid cannot be solved
-    if (hintResponse.solvedStatus === false) {
-      setShowNoSolutionFoundModal((show) => !show);
-      return;
-    }
+  //   // Checking if the grid cannot be solved
+  //   if (hintResponse.solvedStatus === false) {
+  //     setShowNoSolutionFoundModal((show) => !show);
+  //     return;
+  //   }
 
-    // setting the result board
-    setGrid(hintResponse.board);
+  //   // setting the result board
+  //   setGrid(hintResponse.board);
 
-    // Adding hint count
-    setHintsTaken((hints) => hints + 1);
+  //   // Adding hint count
+  //   setHintsTaken((hints) => hints + 1);
 
-    // Checking if the player has won
-    let playerWon = checkPlayerWon(hintResponse.board);
-    if (playerWon) {
-      setIsPlayerWon(true);
-      setShowGameDetails(true);
-    }
-  };
+  //   // Checking if the player has won
+  //   let playerWon = checkPlayerWon(hintResponse.board);
+  //   if (playerWon) {
+  //     setIsPlayerWon(true);
+  //     setShowGameDetails(true);
+  //   }
+  // };
 
   const handleNewGame = (maxEmptyCellsCount) => {
     // Waiting for the function to return the grid
@@ -133,10 +123,10 @@ const Game = () => {
     setShowDifficultySelectionModal((show) => !show);
   };
 
-  const handleClearBoard = () => {
-    setIsPlayerWon(false);
-    setGrid(arrayDeepCopy(startingGrid));
-  };
+  // const handleClearBoard = () => {
+  //   setIsPlayerWon(false);
+  //   setGrid(arrayDeepCopy(startingGrid));
+  // };
 
   const handleCellClick = (row, column, isModifiable) => {
     if (!isModifiable) {
@@ -167,37 +157,22 @@ const Game = () => {
   console.log("....");
 
   // If we donot have anything in the local storage
-  if (grid == null && startingGrid == null) handleNewGame(gameMode);
+  // if (grid == null && startingGrid == null) handleNewGame(gameMode);
 
   return (
     <div className="Game">
       <div className="show-game-detail-container-button">
         <button onClick={() => setShowGameDetails((show) => !show)}>
-          <AiOutlineMenu />
+          <FaReact/>
         </button>
       </div>
 
-      <h1
-        onClick={() => setShowInformationModal((show) => !show)}
-        className="main-title"
-      >
-        Sudoku Game
-      </h1>
-      {showInformationModal && (
-        <InformationModal
-          closeModal={() => setShowInformationModal((show) => !show)}
-        />
-      )}
+      <h1 onClick={() => setShowInformationModal((show) => !show)} className="main-title">Max Tries Sudoku</h1>
+      {/* {showInformationModal && ( <InformationModal closeModal={() => setShowInformationModal((show) => !show)}/> )} */}
 
-      {showNoSolutionFoundModal && (
-        <NoSolutionFoundModal
-          closeModal={() => setShowNoSolutionFoundModal((show) => !show)}
-        />
-      )}
+      {/* {showNoSolutionFoundModal && ( <NoSolutionFoundModal closeModal={() => setShowNoSolutionFoundModal((show) => !show)}/> )} */}
 
-      {showDifficultySelectionModal && (
-        <DifficultySelectionModal
-          closeModal={() => setShowDifficultySelectionModal((show) => !show)}
+      {showDifficultySelectionModal && ( <DifficultySelectionModal closeModal={() => setShowDifficultySelectionModal((show) => !show)}
           handleNewGame={handleNewGame}
           easyMaxEmptyCells={easyMaxEmptyCells}
           mediumMaxEmptyCells={mediumMaxEmptyCells}
@@ -205,9 +180,7 @@ const Game = () => {
         />
       )}
 
-      {showGameDetails && (
-        <GameDetails
-          closeModal={() => setShowGameDetails((show) => !show)}
+      {/* {showGameDetails && ( <GameDetails closeModal={() => setShowGameDetails((show) => !show)}
           movesTaken={movesTaken}
           hintsTaken={hintsTaken}
           startTime={startTime}
@@ -217,30 +190,15 @@ const Game = () => {
           mediumMaxEmptyCells={mediumMaxEmptyCells}
           hardMaxEmptyCells={hardMaxEmptyCells}
         />
-      )}
+      )} */}
+
       <Grid handleCellClick={handleCellClick} grid={grid} />
       <ChoiceBoard setClickValue={setClickValue} selected={clickValue} />
       <div className="action-container">
-        <Button
-          onClick={handleClearBoard}
-          buttonStyle="btn--primary--solid"
-          text="Clear"
-        />
-        <Button
-          onClick={handleSolve}
-          buttonStyle="btn--success--solid"
-          text="Solve"
-        />
-        <Button
-          onClick={handleHint}
-          buttonStyle="btn--warning--solid"
-          text="Hint"
-        />
-        <Button
-          onClick={() => setShowDifficultySelectionModal((show) => !show)}
-          buttonStyle="btn--danger--solid"
-          text="New Game"
-        />
+        <Button onClick="" buttonStyle="btn--primary--solid" text="Clear"/>
+        <Button onClick="" buttonStyle="btn--success--solid" text="Solve"/>
+        <Button onClick="" buttonStyle="btn--warning--solid" text="Hint"/>
+        <Button onClick={() => setShowDifficultySelectionModal((show) => !show)} buttonStyle="btn--danger--solid" text="New Game"/>
       </div>
     </div>
   );
